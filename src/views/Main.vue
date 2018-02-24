@@ -1,5 +1,8 @@
 <style lang="less">
     @import "./main.less";
+    .main{
+        margin-top: 0px;
+    }
 </style>
 <template>
     <div class="main" :class="{'main-hide-text': shrink}">
@@ -65,7 +68,7 @@
         </div>
     </div>
 </template>
-<script>
+<script  type="text/ecmascript-6">
     import shrinkableMenu from './main-components/shrinkable-menu/shrinkable-menu.vue';
     import tagsPageOpened from './main-components/tags-page-opened.vue';
     import breadcrumbNav from './main-components/breadcrumb-nav.vue';

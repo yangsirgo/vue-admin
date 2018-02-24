@@ -1,78 +1,274 @@
 <style lang="less">
-    @import './login.less';
+    @import './login_style/iconfont/font_1/iconfont.css';
+    @import './login_style/login.css';
+    @import './login_style/shake.css';
+    @import './login_style/tooltip.css';
 </style>
 
 <template>
-    <div class="login" @keydown.enter="handleSubmit">
-        <div class="login-con">
-            <Card :bordered="false">
-                <p slot="title">
-                    <Icon type="log-in"></Icon>
-                    欢迎登录
-                </p>
-                <div class="form-con">
-                    <Form ref="loginForm" :model="form" :rules="rules">
-                        <FormItem prop="userName">
-                            <Input v-model="form.userName" placeholder="请输入用户名">
-                                <span slot="prepend">
-                                    <Icon :size="16" type="person"></Icon>
-                                </span>
-                            </Input>
-                        </FormItem>
-                        <FormItem prop="password">
-                            <Input type="password" v-model="form.password" placeholder="请输入密码">
-                                <span slot="prepend">
-                                    <Icon :size="14" type="locked"></Icon>
-                                </span>
-                            </Input>
-                        </FormItem>
-                        <FormItem>
-                            <Button @click="handleSubmit" type="primary" long>登录</Button>
-                        </FormItem>
-                    </Form>
-                    <p class="login-tip">输入任意用户名和密码即可</p>
+    <div class="login-admin" @keydown.enter="handleSubmit">
+        <div class="login_logo">
+            <!-- 项目图片logo -->
+            <!--<img src="http://192.168.2.4/nocportal/skin/blue/images/login/logo-big.png">-->
+        </div>
+        <div class="login_box">
+            <div class="login_title">
+                <ul id="contain">
+                    <li>Work's simple, Work's good.</li>
+                </ul>
+            </div>
+            <div class="login_form">
+                <div class="form-group">
+                    <div class="form-group-in-user" id="usernameShake">
+                        <span class="icon_p iconfont icon-nav-user icon_color"></span>
+                        <input id="name" value="" name="username" type="text" class="form-control in"
+                               autocomplete="off"
+                               v-model="username"
+                               @keyup.enter="loginHandler"
+                               @input="changeHanler"
+                               v-focus>
+                            <span class="icondp iconfont icon-list-input-delete icon_color"
+                                  v-show="isDelete"
+                                  @click="deleteUser"></span>
+                    </div>
                 </div>
-            </Card>
+                <div class="form-group">
+                    <div class="form-group-in-pass"  id="passwordShake">
+                        <span class="icon_p iconfont icon-nav-access icon_color"></span>
+                        <input id="password" value="" name="password" autocomplete="new-password" class="password form-control in"
+                               :type="isPsw"
+                               onpaste="return false"
+                               oncontextmenu="return false"
+                               oncopy="return false"
+                               oncut="return false"
+                               v-model="password"
+                               @keyup="checkCapsLockKeyUp($event)"
+                               @keypress="checkCapsLock($event)"
+                               @focus="isFocusBoo = true"
+                               @blur="isFocusBoo = false;"
+                               @input="changeHanler">
+                            <span class="icondp iconfont icon-list-show-password icon_color icon_font"
+                                  v-show="isSee"
+                                  @mouseup="mouseupHanler($event)"
+                                  @mousedown="isPsw = 'text'"
+                            ></span>
+                    </div>
+                    <div class="tooltip tooltip-pos" :aria-hidden="!isCaplock" x-placement="bottom">
+                        <div class="tooltip-arrow" style="left: 19px;"></div>
+                        <div class="tooltip-inner">大小写锁定已打开</div>
+                    </div>
+                </div>
+                <div class="login">
+                    <label class="t"></label>
+                    <div id="submit_btn" class="login_button"
+                         @click.prevent="loginHandler">
+                        <span id="loginsubmitword">登&nbsp;录</span>
+                    </div>
+                </div>
+                <!--_csrf指令-->
+                <input type="hidden" id="_csrf" value="${_csrf.token}" />
+                <div class="errorMessage" id="errorMessage" v-show="error">
+                    {{errorMsg}}
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<script>
+<script  type="text/ecmascript-6">
 import Cookies from 'js-cookie';
+import $ from 'jquery';
+
 export default {
     data () {
         return {
-            form: {
-                userName: 'iview_admin',
-                password: ''
-            },
-            rules: {
-                userName: [
-                    { required: true, message: '账号不能为空', trigger: 'blur' }
-                ],
-                password: [
-                    { required: true, message: '密码不能为空', trigger: 'blur' }
-                ]
-            }
+            username:'',
+            password:'',
+            error:false,
+            isDelete:false,
+            isSee:false,
+            isPsw:'password',
+            capsLockState:'',
+            isCaplock:false,
+            isFocusBoo:false,
+            errorMsg:''
         };
     },
+    mounted:function(){
+        var _t = this;
+        document.msCapsLockWarningOff = true;//针对IE自定义capslock事件
+    },
     methods: {
-        handleSubmit () {
-            this.$refs.loginForm.validate((valid) => {
-                if (valid) {
-                    Cookies.set('user', this.form.userName);
-                    Cookies.set('password', this.form.password);
-                    this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
-                    if (this.form.userName === 'iview_admin') {
-                        Cookies.set('access', 0);
-                    } else {
-                        Cookies.set('access', 1);
+        loginHandler () {
+            if(this.username&&this.password){
+//                this.ajaxPost();
+                Cookies.set('user', this.username);
+                Cookies.set('password', this.password);
+                //vuex语法，触发setAvator方法 将用户图像链接缓存到本地
+                this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
+                if (this.username === 'iview_admin') {
+                    Cookies.set('access', 0);
+                } else {
+                    Cookies.set('access', 1);
+                }
+                //跳转页面
+                this.$router.push({
+                    name: 'home_index'
+                });
+            }else{
+                if((this.username == '')&&(this.password == '')){
+                    this.ShakeFn('#usernameShake',8,3,100);
+                }
+                if(this.password == ''&&this.username != ''){
+                    this.ShakeFn('#passwordShake',8,3,100);
+                }
+                if(this.username == ''&&this.password != ''){
+                    this.ShakeFn('#usernameShake',8,3,100);
+                }
+
+            }
+        },
+        checkCapsLock:function(event){
+            var keyCode = event.keyCode || event.which;
+            var isShift = event.shiftKey || (keyCode == 16) || false;
+            var c1 = (keyCode >= 65 && keyCode <= 90) && ! isShift; // Caps Lock 打开，且没有按住shift键
+            var c2 = (keyCode >= 97 && keyCode <= 122) && isShift; // Caps Lock 打开，且按住shift键
+            var c3 = (keyCode >= 65 && keyCode <= 90) && isShift; // Caps Lock 关闭，且按住shift键
+            var c4 = (keyCode >= 97 && keyCode <= 122) && ! isShift; // Caps Lock 关闭，且没有按住shift键
+            if (c1 || c2) {
+                this.capsLockState = 'on';
+            }
+            if (c3 || c4) {
+                this.capsLockState = 'off';
+            }
+        },
+        checkCapsLockKeyUp:function(event){
+            var e = event || window.event;
+            if (e.keyCode == 20 && this.capsLockState != '') {
+                if (this.capsLockState == 'on') {
+                    this.capsLockState = 'off';
+                } else {
+                    this.capsLockState = 'on';
+                }
+            }
+            if(e.keyCode == 13){
+                this.loginHandler();
+            }
+        },
+        ShakeFn:function (obj,time,wh,fx) {
+            $(function(){
+                var $panel = $(obj);
+                var offset = $panel.offset()-$panel.width();
+                var x= offset.left;
+                var y= offset.top;
+                for(var i=1; i<=time; i++){
+                    if(i%2==0) {
+                        $panel.animate({left:'+'+wh+'px'},fx);
+                    }else
+                    {
+                        $panel.animate({left:'-'+wh+'px'},fx);
                     }
-                    this.$router.push({
-                        name: 'home_index'
-                    });
+
+                }
+                $panel.animate({left:0},fx);
+                $panel.offset({ top: y, left: x });
+
+            })
+        },
+        ajaxPost:function(){
+            var t_ = this;
+            var csrf = $('#_csrf').val();
+            $.ajax({
+                type: 'POST',
+                url: AjaxConfig.loginUrl,
+                data: {
+                    username:t_.username,
+                    password:t_.password,
+                    _csrf:csrf
+                },
+                dataType: 'json',
+                success: function(result){
+                    if(result.status=='success'){
+                        window.location.href = result.details.goUrl;//跳转到主页面
+                    }else if(result.status=='error'){
+                        t_.error = true;
+                        t_.errorMsg = '用户名或密码不正确';
+                    }
                 }
             });
+        },
+        changeHanler:function(e){
+            var tar_ = e.target;
+            if(tar_.id === 'name'){
+                tar_.value == ''?this.isDelete = false:this.isDelete = true;
+            };
+            if(tar_.id === 'password'){
+                tar_.value == ''?this.isSee = false:this.isSee = true;
+            }
+        },
+        deleteUser:function(){
+            this.username = '';
+            this.isDelete = false;
+            $('#name').focus();
+        },
+        mouseupHanler:function(e){
+            this.isPsw = 'password';
+            $('#password').focus();
+        },
+        inputLength:function(val,sliceLen){
+            var len = 0;
+            var sliceIndex = sliceLen;
+            for (var i = 0; i < val.length; i++) {
+                var a = val.charAt(i);
+                if (a.match(/[^\x00-\xff]/ig) != null) {
+                    len += 2;
+                }else {
+                    len += 1;
+                }
+                if(len==sliceLen){
+                    sliceIndex = i;
+                }
+            };
+            return {
+                len:len,
+                sliceIndex:sliceIndex+1
+            }
+        }
+    },
+    watch:{
+        capsLockState:function(n,o){
+            if(n == 'on'&&this.isFocusBoo){
+                this.isCaplock = true;
+            }else{
+                this.isCaplock = false;
+            }
+        },
+        isFocusBoo:function(n,o){//监听是否聚焦input,隐藏tip
+            if(this.capsLockState == 'on'&&n){
+                this.isCaplock = true;
+            }else{
+                this.isCaplock = false;
+            }
+        },
+        username:function(n,o){
+            var lenObj = this.inputLength(n,20);
+            if(lenObj.len>=20){
+                this.error = true;
+                this.errorMsg = "用户名不可超过20个字符";
+                this.username = this.username.slice(0, lenObj.sliceIndex);
+            }else{
+                this.error = false;
+            }
+        },
+        password:function(n,o){
+            var lenObj = this.inputLength(n,200);
+            if(lenObj.len>=200){
+                this.error = true;
+                this.errorMsg = "密码不可超过200个字符";
+                this.password = this.password.slice(0, lenObj.sliceIndex);
+            }else{
+                this.error = false;
+            }
         }
     }
 };
