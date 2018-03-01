@@ -1,0 +1,42 @@
+[
+  {
+    "date": "2018-02-26 07:00",
+    "allTotal": 18566,
+    "successTotal": 0,
+    "failTotal": 18566,
+    "online": "0%",
+    "department": "顶级部门"
+  },
+  {
+    "date": "2018-02-26 08:00",
+    "allTotal": 18566,
+    "successTotal": 0,
+    "failTotal": 18566,
+    "online": "0%",
+    "department": "顶级部门"
+  },
+  {
+    "date": "2018-02-26 09:00",
+    "allTotal": 18565,
+    "successTotal": 0,
+    "failTotal": 18565,
+    "online": "0%",
+    "department": "顶级部门"
+  },
+  {
+    "date": "2018-02-26 10:00",
+    "allTotal": 18565,
+    "successTotal": 0,
+    "failTotal": 18565,
+    "online": "0%",
+    "department": "顶级部门"
+  },
+  {
+    "date": "2018-02-26 11:00",
+    "allTotal": 18565,
+    "successTotal": 0,
+    "failTotal": 18565,
+    "online": "0%",
+    "department": "顶级部门"
+  }
+]

@@ -19,6 +19,9 @@ function getExplorer () {
     };
 };
 function tranform (table, aId, name) {
+    console.log(table);
+    console.log(aId);
+    console.log(name);
     let tableHead = table.$children[0].$el;
     let tableBody = table.$children[1].$el;
     let tableInnerHTML = '<thead><tr>';

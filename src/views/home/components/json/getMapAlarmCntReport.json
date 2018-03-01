@@ -1,0 +1,173 @@
+{
+  "data": [
+    {
+      "area": "江苏省-南京市-下关区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 1435,
+      "violationExtLink": 0,
+      "availability": 594,
+      "shareNetwork": 0,
+      "value": 2953,
+      "spoofing": 924,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-六合区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 1804,
+      "violationExtLink": 0,
+      "availability": 823,
+      "shareNetwork": 0,
+      "value": 3801,
+      "spoofing": 1174,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-建邺区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 3327,
+      "violationExtLink": 0,
+      "availability": 651,
+      "shareNetwork": 0,
+      "value": 5154,
+      "spoofing": 1176,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-栖霞区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 3466,
+      "violationExtLink": 0,
+      "availability": 1645,
+      "shareNetwork": 0,
+      "value": 7523,
+      "spoofing": 2412,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-江宁区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 382,
+      "violationExtLink": 0,
+      "availability": 20,
+      "shareNetwork": 0,
+      "value": 422,
+      "spoofing": 20,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-浦口区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 3739,
+      "violationExtLink": 0,
+      "availability": 1630,
+      "shareNetwork": 0,
+      "value": 7856,
+      "spoofing": 2487,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-溧水县",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 524,
+      "violationExtLink": 0,
+      "availability": 33,
+      "shareNetwork": 0,
+      "value": 609,
+      "spoofing": 52,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-玄武区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 2580,
+      "violationExtLink": 0,
+      "availability": 1229,
+      "shareNetwork": 0,
+      "value": 5473,
+      "spoofing": 1664,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-白下区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 797,
+      "violationExtLink": 0,
+      "availability": 315,
+      "shareNetwork": 0,
+      "value": 1619,
+      "spoofing": 507,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-秦淮区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 3845,
+      "violationExtLink": 0,
+      "availability": 1735,
+      "shareNetwork": 0,
+      "value": 8345,
+      "spoofing": 2765,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-雨花台区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 4392,
+      "violationExtLink": 0,
+      "availability": 1593,
+      "shareNetwork": 0,
+      "value": 8307,
+      "spoofing": 2322,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-高淳县",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 1741,
+      "violationExtLink": 0,
+      "availability": 775,
+      "shareNetwork": 0,
+      "value": 3628,
+      "spoofing": 1112,
+      "videoQuality": 0
+    },
+    {
+      "area": "江苏省-南京市-鼓楼区",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 2461,
+      "violationExtLink": 1,
+      "availability": 1024,
+      "shareNetwork": 0,
+      "value": 4818,
+      "spoofing": 1332,
+      "videoQuality": 0
+    },
+    {
+      "area": "",
+      "natBorder": 0,
+      "timeAbnormal": 0,
+      "invasion": 1,
+      "violationExtLink": 0,
+      "availability": 0,
+      "shareNetwork": 0,
+      "value": 1,
+      "spoofing": 0,
+      "videoQuality": 0
+    }
+  ],
+  "resultCode": "1"
+}

@@ -1,0 +1,53 @@
+{
+  "data": [
+    {
+      "dict_name": "摄像头",
+      "cnt": 18565
+    },
+    {
+      "dict_name": "其他",
+      "cnt": 9658
+    },
+    {
+      "dict_name": "烽火设备",
+      "cnt": 2075
+    },
+    {
+      "dict_name": "PC",
+      "cnt": 1363
+    },
+    {
+      "dict_name": "三层交换机",
+      "cnt": 227
+    },
+    {
+      "dict_name": "网关设备",
+      "cnt": 173
+    },
+    {
+      "dict_name": "NVR",
+      "cnt": 13
+    },
+    {
+      "dict_name": "路由器",
+      "cnt": 3
+    },
+    {
+      "dict_name": "二层交换机",
+      "cnt": 1
+    },
+    {
+      "dict_name": "打印机",
+      "cnt": 0
+    },
+    {
+      "dict_name": "未知",
+      "cnt": 0
+    },
+    {
+      "dict_name": "华龙设备",
+      "cnt": 0
+    }
+  ],
+  "resultCode": "1"
+}

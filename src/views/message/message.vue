@@ -1,258 +1,449 @@
-<style lang="less">
-    @import './message.less';
+<style scoped>
+    .button-span{
+        float: right;
+    }
+    ul.ivu-page{
+        display: inline-flex;
+    }
+    span.span-page{
+        float: left;
+        display: inline-flex;
+        padding-top: 5px;
+    }
+    div.ivu-checkbox-group{
+        margin-left: 18px;
+        margin-top: -10px;
+    }
+    div.ivu-table-wrapper{
+        margin-top: 5px;
+    }
 </style>
-
 <template>
-    <div class="message-main-con">
-        <div class="message-mainlist-con">
-            <div>
-                <Button @click="setCurrentMesType('unread')" size="large" long type="text"><transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'unread'" type="checkmark"></Icon></transition><span class="mes-type-btn-text">未读消息</span><Badge class="message-count-badge-outer" class-name="message-count-badge" :count="unreadCount"></Badge></Button>
-            </div>
-            <div>
-                <Button @click="setCurrentMesType('hasread')" size="large" long type="text"><transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'hasread'" type="checkmark"></Icon></transition><span class="mes-type-btn-text">已读消息</span><Badge class="message-count-badge-outer" class-name="message-count-badge" :count="hasreadCount"></Badge></Button>
-            </div>
-            <div>
-                <Button @click="setCurrentMesType('recyclebin')" size="large" long type="text"><transition name="mes-current-type-btn"><Icon v-show="currentMessageType === 'recyclebin'" type="checkmark"></Icon></transition><span class="mes-type-btn-text">回收站</span><Badge class="message-count-badge-outer" class-name="message-count-badge" :count="recyclebinCount"></Badge></Button>
-            </div>
-        </div>
-        <div class="message-content-con">
-            <transition name="view-message">
-                <div v-if="showMesTitleList" class="message-title-list-con">
-                    <Table ref="messageList" :columns="mesTitleColumns" :data="currentMesList" :no-data-text="noDataText"></Table>
+    <div>
+        <!--<Card>-->
+            <!--<p slot="title">-->
+                <!--<Icon type="information-circled"></Icon>-->
+                <!--报警管理-->
+            <!--</p>-->
+            <Select v-model="model2" style="width:100px">
+                <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+            <Input v-model="searchConName1" icon="search" @on-change="handleSearch1" placeholder="IP/内容..."
+                   style="width: 200px"/>
+
+            <Select v-model="allType" style="width:100px">
+                <Option v-for="item in typeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+            <Select v-model="allState" style="width:100px">
+                <Option v-for="item in stateList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+        <Select v-model="allState" style="width:100px">
+            <Option v-for="item in stateList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        </Select>
+            <span class="button-span">
+                <Button type="ghost"  @click="confirm"><Icon type="android-checkbox-outline"></Icon>全部确认</Button>
+                <a id="hrefToExportTable" style="postion: absolute;left: -10px;top: -10px;width: 0px;height: 0px;"></a>
+                <Button type="ghost"  @click="exportExcel"><Icon type="ios-download-outline"></Icon>导出</Button>
+
+                    <Dropdown  trigger="custom" :visible="visible" placement="bottom-end">
+                        <Button  type="ghost" icon="gear-b" @click="handleOpen"></Button>
+                        <DropdownMenu slot="list">
+                            <Checkbox-group v-model="tableColumnsChecked" @on-change="changeTableColumns">
+                                <Checkbox label="select1" style="display: none">多选框</Checkbox>
+                                <br/>
+                                <Checkbox label="name2">报警IP</Checkbox>
+                                <br/>
+                                <Checkbox label="status3">类型</Checkbox>
+                                <br/>
+                                <Checkbox label="portrayal4">级别</Checkbox>
+                                <br/>
+                                <Checkbox label="people5">MAC</Checkbox>
+                                <br/>
+                                <Checkbox label="time6">内容</Checkbox>
+                                <br/>
+                                <Checkbox label="update7">时间</Checkbox>
+                                <br/>
+                                <Checkbox label="ruwang_sta8">入网状态</Checkbox>
+                                <br/>
+                                <Checkbox label="update19">操作</Checkbox>
+                            </Checkbox-group>
+                            <div style="text-align: right;margin:10px;">
+                                <Button type="primary"  size="small" @click="handleClose">关闭</Button>
+                            </div>
+                        </DropdownMenu>
+                    </Dropdown>
+            </span>
+            <Table :data="tableData1" :columns="tableColumns1" stripe ref="tableExcel" ></Table>
+            <div style="margin: 10px;overflow: hidden">
+                <span class="span-page">
+                    当前1 - {{pageNum}}条 , 共{{pageTotal}}条
+                </span>
+                <div style="float: right;">
+                    <Select v-model="pageNum" style="width:60px" @on-change="changePage">
+                        <Option v-for="item in pageNumList" :value="item.value" :key="item.value">{{ item.label }}条</Option>
+                    </Select>
+                    <Page :total="pageTotal" :current="1" @on-change="changePage" :pageSize="pageNum"></Page>
                 </div>
-            </transition>
-            <transition name="back-message-list">
-                <div v-if="!showMesTitleList" class="message-view-content-con">
-                    <div class="message-content-top-bar">
-                        <span class="mes-back-btn-con"><Button type="text" @click="backMesTitleList"><Icon type="chevron-left"></Icon>&nbsp;&nbsp;返回</Button></span>
-                        <h3 class="mes-title">{{ mes.title }}</h3>
-                    </div>
-                    <p class="mes-time-con"><Icon type="android-time"></Icon>&nbsp;&nbsp;{{ mes.time }}</p>
-                    <div class="message-content-body">
-                        <p class="message-content">{{ mes.content }}</p>
-                    </div>
-                </div>
-            </transition>
-        </div>
+            </div>
+        <!--</Card>-->
     </div>
 </template>
+<script type="text/ecmascript-6">
+    import {table2excelData, excelColumns} from '@/views/tables/data/table2excel.js';
+    import table2excel from '@/libs/table2excel.js';
 
-<script>
-export default {
-    name: 'message_index',
-    data () {
-        const markAsreadBtn = (h, params) => {
-            return h('Button', {
-                props: {
-                    size: 'small'
-                },
-                on: {
-                    click: () => {
-                        this.hasreadMesList.unshift(this.currentMesList.splice(params.index, 1)[0]);
-                        this.$store.commit('setMessageCount', this.unreadMesList.length);
+    export default {
+        data () {
+            return {
+                tableColumnsChecked: ['select1','name2', 'status3', 'portrayal4', 'people5', 'time6', 'update7', 'ruwang_sta8', 'update19'],
+                visible: false,
+                searchConName1:'',
+                cityList: [
+                    {
+                        value: '1',
+                        label: '未确认'
+                    },
+                    {
+                        value: '2',
+                        label: '已确认'
                     }
-                }
-            }, '标为已读');
-        };
-        const deleteMesBtn = (h, params) => {
-            return h('Button', {
-                props: {
-                    size: 'small',
-                    type: 'error'
-                },
-                on: {
-                    click: () => {
-                        this.recyclebinList.unshift(this.hasreadMesList.splice(params.index, 1)[0]);
+                ],
+                model2: '1',
+                typeList: [
+                    {
+                        value: '0',
+                        label: '所有类型'
+                    },
+                    {
+                        value: '1',
+                        label: '离线'
+                    },
+                    {
+                        value: '2',
+                        label: '冒用'
+                    },
+                    {
+                        value: '3',
+                        label: '入侵'
+                    },
+                    {
+                        value: '4',
+                        label: '图像质量'
+                    },
+                    {
+                        value: '5',
+                        label: '网络边界'
+                    },
+                    {
+                        value: '6',
+                        label: '共享网络'
                     }
-                }
-            }, '删除');
-        };
-        const restoreBtn = (h, params) => {
-            return h('Button', {
-                props: {
-                    size: 'small'
-                },
-                on: {
-                    click: () => {
-                        this.hasreadMesList.unshift(this.recyclebinList.splice(params.index, 1)[0]);
+                ],
+                allType: '0',
+                stateList: [
+                    {
+                        value: '0',
+                        label: '所有级别'
+                    },
+                    {
+                        value: '1',
+                        label: '致命'
+                    },
+                    {
+                        value: '2',
+                        label: '严重'
+                    },
+                    {
+                        value: '3',
+                        label: '警告'
                     }
-                }
-            }, '还原');
-        };
-        return {
-            currentMesList: [],
-            unreadMesList: [],
-            hasreadMesList: [],
-            recyclebinList: [],
-            currentMessageType: 'unread',
-            showMesTitleList: true,
-            unreadCount: 0,
-            hasreadCount: 0,
-            recyclebinCount: 0,
-            noDataText: '暂无未读消息',
-            mes: {
-                title: '',
-                time: '',
-                content: ''
-            },
-            mesTitleColumns: [
-                // {
-                //     type: 'selection',
-                //     width: 50,
-                //     align: 'center'
-                // },
-                {
-                    title: ' ',
-                    key: 'title',
-                    align: 'left',
-                    ellipsis: true,
-                    render: (h, params) => {
-                        return h('a', {
-                            on: {
-                                click: () => {
-                                    this.showMesTitleList = false;
-                                    this.mes.title = params.row.title;
-                                    this.mes.time = this.formatDate(params.row.time);
-                                    this.getContent(params.index);
-                                }
-                            }
-                        }, params.row.title);
-                    }
-                },
-                {
-                    title: ' ',
-                    key: 'time',
-                    align: 'center',
-                    width: 180,
-                    render: (h, params) => {
-                        return h('span', [
-                            h('Icon', {
+                ],
+                allState: '0',
+                pageNumList:[
+                    {
+                        value: 10,
+                        label: 10
+                    },
+                    {
+                        value: 15,
+                        label: 15
+                    },
+                    {
+                        value: 20,
+                        label: 20
+                    },
+                ],
+                pageNum:10,
+                tableData1: this.mockTableData1(10),
+                tableColumns1: []
+            }
+        },
+        mounted () {
+            this.changeTableColumns();
+            var _t = this;
+//            document.addEventListener("click",this.handleClose,false)
+        },
+        beforeDestroy(){
+//            document.removeEventListener("click",this.handleClose)
+        },
+        methods: {
+            getTable2Columns(){
+                const table2ColumnList = {
+                    select1:{
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    name2:{
+                        title: '报警IP',
+                        sortable: true,
+                        width:"200px",
+                        align:"left",
+                        key: 'name'
+
+                    },
+                    status3:{
+                        title: '类型',
+                        key: 'status',
+                        render: (h, params) => {
+                            const row = params.row;
+                            const color = row.status === 1 ? '#ff9900' : row.status === 2 ? '#2d8cf0' : '#ed3f14';
+                            const text = row.status === 1 ? '警告' : row.status === 2 ? '信息' : '致命';
+
+                            return h('Tag', {
                                 props: {
-                                    type: 'android-time',
-                                    size: 12
+//                                    type: 'dot',
+                                    color: color
+                                }
+                            }, text);
+                        }
+                    },
+                    portrayal4:{
+                        title: '级别',
+                        key: 'portrayal',
+                        render: (h, params) => {
+                            return h('Poptip', {
+                                props: {
+                                    trigger: 'hover',
+                                    title: params.row.portrayal.length + 'portrayals',
+                                    placement: 'bottom'
+                                }
+                            }, [
+                                h('Tag', params.row.portrayal.length),
+                                h('div', {
+                                    slot: 'content'
+                                }, [
+                                    h('ul', this.tableData1[params.index].portrayal.map(item => {
+                                        return h('li', {
+                                            style: {
+                                                textAlign: 'center',
+                                                padding: '4px'
+                                            }
+                                        }, item)
+                                    }))
+                                ])
+                            ]);
+                        }
+                    },
+                    people5:{
+                        title: 'MAC',
+                        key: 'people',
+                        render: (h, params) => {
+                            return h('Poptip', {
+                                props: {
+                                    trigger: 'hover',
+                                    title: params.row.people.length + 'customers',
+                                    placement: 'bottom'
+                                }
+                            }, [
+                                h('Tag', params.row.people.length),
+                                h('div', {
+                                    slot: 'content'
+                                }, [
+                                    h('ul', this.tableData1[params.index].people.map(item => {
+                                        return h('li', {
+                                            style: {
+                                                textAlign: 'center',
+                                                padding: '4px'
+                                            }
+                                        }, item.n + '：' + item.c + 'People')
+                                    }))
+                                ])
+                            ]);
+                        }
+                    },
+                    time6:{
+                        title: '内容',
+                        key: 'time',
+                        render: (h, params) => {
+                            return h('div', 'Almost' + params.row.time + 'days');
+                        }
+                    },
+                    update7:{
+                        title: '时间',
+                        key: 'update',
+                        render: (h, params) => {
+                            return h('div', this.formatDate(this.tableData1[params.index].update));
+                        }
+                    },
+                    ruwang_sta8:{
+                        title: '入网状态',
+                        key: 'ruwang_sta',
+                        render: (h, params) => {
+                            const row = params.row;
+                            const text = row.ruwang_sta === 1 ? '开启' : '隔离';
+                            return h('i-switch', {
+                                props: {
+                                    size:"large",
+                                    value: row.ruwang_sta == 1
                                 },
-                                style: {
-                                    margin: '0 5px'
+                                on: {
+                                    'on-change': (value) => {//触发事件是on-change,用双引号括起来，
+                                    }
                                 }
-                            }),
-                            h('span', {
-                                props: {
-                                    type: 'android-time',
-                                    size: 12
-                                }
-                            }, this.formatDate(params.row.time))
-                        ]);
-                    }
-                },
-                {
-                    title: ' ',
-                    key: 'asread',
-                    align: 'center',
-                    width: 100,
-                    render: (h, params) => {
-                        if (this.currentMessageType === 'unread') {
-                            return h('div', [
-                                markAsreadBtn(h, params)
+                            },[
+                                h("span",{
+                                    slot:"open"
+                                },"开启"),
+                                h("span",{
+                                    slot:"close"
+                                },"隔离"),
                             ]);
-                        } else if (this.currentMessageType === 'hasread') {
+                        }
+                    },
+                    update19:{
+                        title: '操作',
+                        key: 'update',
+                        align: 'center',
+                        width: 250,
+                        render: (h, params) => {
                             return h('div', [
-                                deleteMesBtn(h, params)
-                            ]);
-                        } else {
-                            return h('div', [
-                                restoreBtn(h, params)
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(params.index)
+                                        }
+                                    }
+                                }, 'View'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.remove(params.index)
+                                        }
+                                    }
+                                }, 'Delete')
                             ]);
                         }
                     }
+                };
+                let data = [];
+                this.tableColumnsChecked.forEach(function(col){
+                    data.push(table2ColumnList[col]);
+                    });
+                return data;
+            },
+            changeTableColumns () {
+                function c(a,b){
+                    a = a.slice(-1);
+                    b = b.slice(-1);
+                    if(a<b){
+                        return -1;
+                    }else if(a>b){
+                        return 1;
+                    }
                 }
-            ]
-        };
-    },
-    methods: {
-        formatDate (time) {
-            let date = new Date(time);
-            let year = date.getFullYear();
-            let month = date.getMonth() + 1;
-            let day = date.getDate();
-            let hour = date.getHours();
-            let minute = date.getMinutes();
-            let second = date.getSeconds();
-            return year + '/' + month + '/' + day + '  ' + hour + ':' + minute + ':' + second;
-        },
-        backMesTitleList () {
-            this.showMesTitleList = true;
-        },
-        setCurrentMesType (type) {
-            if (this.currentMessageType !== type) {
-                this.showMesTitleList = true;
-            }
-            this.currentMessageType = type;
-            if (type === 'unread') {
-                this.noDataText = '暂无未读消息';
-                this.currentMesList = this.unreadMesList;
-            } else if (type === 'hasread') {
-                this.noDataText = '暂无已读消息';
-                this.currentMesList = this.hasreadMesList;
-            } else {
-                this.noDataText = '回收站无消息';
-                this.currentMesList = this.recyclebinList;
-            }
-        },
-        getContent (index) {
-            // you can write ajax request here to get message content
-            let mesContent = '';
-            switch (this.currentMessageType + index) {
-                case 'unread0': mesContent = '这是您点击的《欢迎登录iView-admin后台管理系统，来了解他的用途吧》的相关内容。'; break;
-                case 'unread1': mesContent = '这是您点击的《使用iView-admin和iView-ui组件库快速搭建你的后台系统吧》的相关内容。'; break;
-                case 'unread2': mesContent = '这是您点击的《喜欢iView-admin的话，欢迎到github主页给个star吧》的相关内容。'; break;
-                case 'hasread0': mesContent = '这是您点击的《这是一条您已经读过的消息》的相关内容。'; break;
-                default: mesContent = '这是您点击的《这是一条被删除的消息》的相关内容。'; break;
-            }
-            this.mes.content = mesContent;
-        }
-    },
-    mounted () {
-        this.currentMesList = this.unreadMesList = [
-            {
-                title: '欢迎登录iView-admin后台管理系统，来了解他的用途吧',
-                time: 1507390106000
+                this.tableColumnsChecked.sort(c);
+                this.tableColumns1 = this.getTable2Columns();
             },
-            {
-                title: '使用iView-admin和iView-ui组件库快速搭建你的后台系统吧',
-                time: 1507390106000
+            handleOpen () {
+                this.visible = true;
             },
-            {
-                title: '喜欢iView-admin的话，欢迎到github主页给个star吧',
-                time: 1507390106000
+            handleClose () {
+                this.visible = false;
+            },
+            confirm () {
+                this.$Modal.confirm({
+                    title: '信息',
+                    content: '<p>确定确认选中的报警？</p>',
+                    onOk: () => {
+                        this.$Message.info('Clicked ok');
+                    },
+                    onCancel: () => {
+                        this.$Message.info('Clicked cancel');
+                    }
+                });
+            },
+            mockTableData1 (cur_pageNum) {
+                let data = [];
+                for (let i = 0; i < cur_pageNum; i++) {
+                    data.push({
+                        name: Math.floor(Math.random() * 100 + 1)+"."+Math.floor(Math.random() * 100 + 1)+"."+Math.floor(Math.random() * 100 + 1)+"."+Math.floor(Math.random() * 100 + 1),
+                        status: Math.floor(Math.random() * 3 + 1),
+                        portrayal: ['City', 'People', 'Cost', 'Life', 'Entertainment'],
+                        people: [
+                            {
+                                n: 'People' + Math.floor(Math.random() * 100 + 1),
+                                c: Math.floor(Math.random() * 1000000 + 100000)
+                            },
+                            {
+                                n: 'People' + Math.floor(Math.random() * 100 + 1),
+                                c: Math.floor(Math.random() * 1000000 + 100000)
+                            },
+                            {
+                                n: 'People' + Math.floor(Math.random() * 100 + 1),
+                                c: Math.floor(Math.random() * 1000000 + 100000)
+                            }
+                        ],
+                        time: Math.floor(Math.random() * 7 + 1),
+                        update: new Date(),
+                        ruwang_sta:Math.floor(Math.random() * 2 + 1)
+                    })
+                }
+                return data;
+            },
+            formatDate (date) {
+                const y = date.getFullYear();
+                let m = date.getMonth() + 1;
+                m = m < 10 ? '0' + m : m;
+                let d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                return y + '-' + m + '-' + d;
+            },
+            changePage () {
+                // The simulated data is changed directly here, and the actual usage scenario should fetch the data from the server
+                this.tableData1 = this.mockTableData1(this.pageNum);
+            },
+            handleSearch1(){
+
+            },
+            exportExcel(){
+                table2excel.transform(this.$refs.tableExcel, 'hrefToExportTable',"报警消息");
+            },
+            show (index) {
+                this.$Modal.info({
+                    title: 'User Info',
+                    content: `报警IP：${this.tableData1[index].name}`
+                })
+            },
+            remove (index) {
+                this.tableData1.splice(index, 1);
             }
-        ];
-        this.hasreadMesList = [
-            {
-                title: '这是一条您已经读过的消息',
-                time: 1507330106000
-            }
-        ];
-        this.recyclebinList = [
-            {
-                title: '这是一条被删除的消息',
-                time: 1506390106000
-            }
-        ];
-        this.unreadCount = this.unreadMesList.length;
-        this.hasreadCount = this.hasreadMesList.length;
-        this.recyclebinCount = this.recyclebinList.length;
-    },
-    watch: {
-        unreadMesList (arr) {
-            this.unreadCount = arr.length;
         },
-        hasreadMesList (arr) {
-            this.hasreadCount = arr.length;
-        },
-        recyclebinList (arr) {
-            this.recyclebinCount = arr.length;
+        computed:{
+            pageTotal () {
+                return this.$store.state.app.messageCount;
+            }
         }
     }
-};
 </script>
-

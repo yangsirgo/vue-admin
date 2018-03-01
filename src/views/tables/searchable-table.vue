@@ -66,6 +66,7 @@ export default {
             searchConTel2: '',
             searchConName3: '',
             columns1: table.columns1,
+            columns2: table.columns2,
             data1: [],
             initTable1: [],
             data2: [],
@@ -77,10 +78,12 @@ export default {
     methods: {
         init () {
             this.data1 = this.initTable1 = table.searchTable1;
-            this.data2 = this.initTable2 = table.searchTable2;
+            this.data2 = this.initTable2 = table.searchTable1;
             this.data3 = this.initTable3 = table.searchTable3;
         },
         search (data, argumentObj) {
+            console.log(data);
+            console.log(argumentObj);
             let res = data;
             let dataClone = data;
             for (let argu in argumentObj) {

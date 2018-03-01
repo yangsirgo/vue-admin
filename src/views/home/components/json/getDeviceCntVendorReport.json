@@ -1,0 +1,61 @@
+{
+  "data": [
+    {
+      "dict_name": "海康威视",
+      "cnt": 13232
+    },
+    {
+      "dict_name": "大华",
+      "cnt": 3960
+    },
+    {
+      "dict_name": "其他",
+      "cnt": 1154
+    },
+    {
+      "dict_name": "宇视",
+      "cnt": 172
+    },
+    {
+      "dict_name": "英飞拓",
+      "cnt": 31
+    },
+    {
+      "dict_name": "天地伟业",
+      "cnt": 13
+    },
+    {
+      "dict_name": "烽火opnwrt",
+      "cnt": 3
+    },
+    {
+      "dict_name": "网关节点",
+      "cnt": 0
+    },
+    {
+      "dict_name": "惠普",
+      "cnt": 0
+    },
+    {
+      "dict_name": "TP-LINK",
+      "cnt": 0
+    },
+    {
+      "dict_name": "锐捷",
+      "cnt": 0
+    },
+    {
+      "dict_name": "hualong",
+      "cnt": 0
+    },
+    {
+      "dict_name": "奥尼克斯",
+      "cnt": 0
+    },
+    {
+      "dict_name": "华三",
+      "cnt": 0
+    }
+  ],
+  "resultCode": "1"
+}
