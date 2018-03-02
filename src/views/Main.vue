@@ -99,6 +99,8 @@
         },
         computed: {
             menuList () {
+//                console.log(this.$store.state.app.menuList);
+//                console.log(this.$store.state.app.openedSubmenuArr);
                 return this.$store.state.app.menuList;
             },
             pageTagsList () {

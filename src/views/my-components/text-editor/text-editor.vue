@@ -5,6 +5,7 @@
 <template>
     <div>
         <Card shadow>
+
             <textarea class='tinymce-textarea' id="tinymceEditer"></textarea>
         </Card>
         <Spin fix v-if="spinShow">

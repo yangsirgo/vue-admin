@@ -42,6 +42,7 @@ export default {
     },
     methods: {
         changeMenu (active) {
+//            console.log(active);//获取点击菜单的那么值con
             this.$emit('on-change', active);
         },
         itemTitle (item) {

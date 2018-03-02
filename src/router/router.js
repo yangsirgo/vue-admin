@@ -80,12 +80,22 @@ export const appRouter = [
     {
         path: '/home',
         icon: 'home',
-        title: {i18n: 'international'},
-        name: 'international',
+        title: "首页",
+        name: 'home',
         component: Main,
         children: [
-            { path: 'index', title: {i18n: 'international'}, name: 'international_index', component: () => import('@/views/international/international.vue') }
+            { path: 'index', title: "首页", name: 'home_index', component: () => import('@/views/home/home.vue') }
         ]
+    },
+    {
+        path: '/message',
+        icon: 'alert-circled',
+        title: '报警管理',
+        name: 'accesstest',
+        component: Main,
+        children: [
+        { path: 'index', title: '报警管理', name: 'message_index',  component: () => import('@/views/message/message.vue') }
+    ]
     },
     {
         path: '/component',
@@ -165,18 +175,18 @@ export const appRouter = [
 
         ]
     },
-    // {
-    //     path: '/charts',
-    //     icon: 'ios-analytics',
-    //     name: 'charts',
-    //     title: '图表',
-    //     component: Main,
-    //     children: [
-    //         { path: 'pie', title: '饼状图', name: 'pie', icon: 'ios-pie', component: resolve => { require('@/views/access/access.vue') },
-    //         { path: 'histogram', title: '柱状图', name: 'histogram', icon: 'stats-bars', component: resolve => { require('@/views/access/access.vue') }
-
-    //     ]
-    // },
+     //{
+     //    path: '/charts',
+     //    icon: 'ios-analytics',
+     //    name: 'charts',
+     //    title: '图表',
+     //    component: Main,
+     //    children: [
+     //        { path: 'pie', title: '饼状图', name: 'pie', icon: 'ios-pie', component: resolve => { require('@/views/access/access.vue') },
+     //        { path: 'histogram', title: '柱状图', name: 'histogram', icon: 'stats-bars', component: resolve => { require('@/views/access/access.vue') }
+     //
+     //    ]
+     //},
     {
         path: '/tables',
         icon: 'ios-grid-view',
