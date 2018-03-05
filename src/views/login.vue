@@ -6,7 +6,7 @@
 </style>
 
 <template>
-    <div class="login-admin" @keydown.enter="handleSubmit">
+    <div class="login-admin">
         <div class="login_logo">
             <!-- 项目图片logo -->
             <!--<img src="http://192.168.2.4/nocportal/skin/blue/images/login/logo-big.png">-->

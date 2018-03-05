@@ -2,12 +2,19 @@
     @import "./home.less";
     @import "homepage.less";
     @import "../../styles/common.less";
+    div.data-source-auto{
+        height:auto;
+        min-height:300px;
+    }
+    div.data-source-pie{
+        height:700px;
+    }
 </style>
 <template>
     <div class="home-main">
         <Row :gutter="10" class="margin-top-10">
             <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
-                <Card>
+                <Card  :style="{marginBottom: '10px'}">
                     <p slot="title" class="card-title">
                         <Icon type="android-map"></Icon>
                         在线率统计
@@ -32,8 +39,9 @@
                         <Icon type="ios-pulse-strong"></Icon>
                         全国报警统计
                     </p>
-                    <div class="data-source-row">
+                    <div class="data-source-row data-source-pie">
                         <data-source-pie></data-source-pie>
+                        <!--<div class="clear"></div>-->
                     </div>
                 </Card>
             </Col>
@@ -43,7 +51,7 @@
                         <Icon type="android-wifi"></Icon>
                         网络安全统计
                     </p>
-                    <div class="data-source-row">
+                    <div class="data-source-row data-source-auto">
                         <mapDataTable></mapDataTable>
                     </div>
                 </Card>

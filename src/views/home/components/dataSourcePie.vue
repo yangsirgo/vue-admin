@@ -670,6 +670,7 @@ export default {
     },
     beforeDestroy(){
         clearInterval(timer);
+        mapChart = null;
     }
 };
 </script>

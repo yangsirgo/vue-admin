@@ -1,8 +1,8 @@
 <style lang="less">
     @import "./main.less";
-    .main{
-        margin-top: 0px;
-    }
+    div.main{
+             margin-top: 0px;
+         }
 </style>
 <template>
     <div class="main" :class="{'main-hide-text': shrink}">
@@ -101,6 +101,7 @@
             menuList () {
 //                console.log(this.$store.state.app.menuList);
 //                console.log(this.$store.state.app.openedSubmenuArr);
+                console.log(this.$store.state.app.menuList);
                 return this.$store.state.app.menuList;
             },
             pageTagsList () {

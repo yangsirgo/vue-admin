@@ -99,78 +99,89 @@ export const appRouter = [
     },
     {
         path: '/component',
-        icon: 'social-buffer',
+        icon: 'network',
         name: 'component',
-        title: '组件',
+        title: '网络',
         component: Main,
         children: [
             {
                 path: 'text-editor',
-                icon: 'compose',
+                icon: 'network',
                 name: 'text-editor',
-                title: '富文本编辑器',
+                title: '网络拓扑图',
                 component: () => import('@/views/my-components/text-editor/text-editor.vue')
-            },
-            {
-                path: 'md-editor',
-                icon: 'pound',
-                name: 'md-editor',
-                title: 'Markdown编辑器',
-                component: () => import('@/views/my-components/markdown-editor/markdown-editor.vue')
-            },
-            {
-                path: 'image-editor',
-                icon: 'crop',
-                name: 'image-editor',
-                title: '图片预览编辑',
-                component: () => import('@/views/my-components/image-editor/image-editor.vue')
-            },
-            {
-                path: 'draggable-list',
-                icon: 'arrow-move',
-                name: 'draggable-list',
-                title: '可拖拽列表',
-                component: () => import('@/views/my-components/draggable-list/draggable-list.vue')
-            },
-            {
-                path: 'area-linkage',
-                icon: 'ios-more',
-                name: 'area-linkage',
-                title: '城市级联',
-                component: () => import('@/views/my-components/area-linkage/area-linkage.vue')
-            },
-            {
-                path: 'file-upload',
-                icon: 'android-upload',
-                name: 'file-upload',
-                title: '文件上传',
-                component: () => import('@/views/my-components/file-upload/file-upload.vue')
-            },
-            {
-                path: 'count-to',
-                icon: 'arrow-graph-up-right',
-                name: 'count-to',
-                title: '数字渐变',
-                // component: () => import('@/views/my-components/count-to/count-to.vue')
-                component: () => import('@/views/my-components/count-to/count-to.vue')
-            },
-            {
-                path: 'split-pane-page',
-                icon: 'ios-pause',
-                name: 'split-pane-page',
-                title: 'split-pane',
-                component: () => import('@/views/my-components/split-pane/split-pane-page.vue')
             }
+            //{
+            //    path: 'md-editor',
+            //    icon: 'pound',
+            //    name: 'md-editor',
+            //    title: 'Markdown编辑器',
+            //    component: () => import('@/views/my-components/markdown-editor/markdown-editor.vue')
+            //},
+            //{
+            //    path: 'image-editor',
+            //    icon: 'crop',
+            //    name: 'image-editor',
+            //    title: '图片预览编辑',
+            //    component: () => import('@/views/my-components/image-editor/image-editor.vue')
+            //},
+            //{
+            //    path: 'draggable-list',
+            //    icon: 'arrow-move',
+            //    name: 'draggable-list',
+            //    title: '可拖拽列表',
+            //    component: () => import('@/views/my-components/draggable-list/draggable-list.vue')
+            //},
+            //{
+            //    path: 'area-linkage',
+            //    icon: 'ios-more',
+            //    name: 'area-linkage',
+            //    title: '城市级联',
+            //    component: () => import('@/views/my-components/area-linkage/area-linkage.vue')
+            //},
+            //{
+            //    path: 'file-upload',
+            //    icon: 'android-upload',
+            //    name: 'file-upload',
+            //    title: '文件上传',
+            //    component: () => import('@/views/my-components/file-upload/file-upload.vue')
+            //},
+            //{
+            //    path: 'count-to',
+            //    icon: 'arrow-graph-up-right',
+            //    name: 'count-to',
+            //    title: '数字渐变',
+            //    // component: () => import('@/views/my-components/count-to/count-to.vue')
+            //    component: () => import('@/views/my-components/count-to/count-to.vue')
+            //},
+            //{
+            //    path: 'split-pane-page',
+            //    icon: 'ios-pause',
+            //    name: 'split-pane-page',
+            //    title: 'split-pane',
+            //    component: () => import('@/views/my-components/split-pane/split-pane-page.vue')
+            //}
         ]
     },
     {
         path: '/form',
         icon: 'android-checkbox',
         name: 'form',
-        title: '表单编辑',
+        title: '系统配置',
         component: Main,
         children: [
-            { path: 'artical-publish', title: '文章发布', name: 'artical-publish', icon: 'compose', component: () => import('@/views/form/article-publish/article-publish.vue') },
+            {   path: '/artical-publish',
+                title: '用户配置',
+                name: 'artical-publish',
+                icon: 'compose',
+                children:[
+                    {   path: '/artical-publish-sub',
+                        title: '管理员',
+                        name: 'artical-publish-sub',
+                        icon: 'person',
+                        component: () => import('@/views/form/work-flow/work-flow.vue')
+                    }
+                ]},
             { path: 'workflow', title: '工作流', name: 'workflow', icon: 'arrow-swap', component: () => import('@/views/form/work-flow/work-flow.vue') }
 
         ]
