@@ -491,7 +491,6 @@ export default {
         this.$nextTick(() => {
             getAssetsData();
             getBrandData();
-            console.log(assetsOpt);
             window.addEventListener('resize', function () {
                 brandChart.resize();
                 assetsChart.resize();

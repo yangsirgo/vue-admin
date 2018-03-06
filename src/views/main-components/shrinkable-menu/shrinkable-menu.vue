@@ -67,6 +67,7 @@ export default {
         handleChange (name) {
             let willpush = true;
             if (this.beforePush !== undefined) {
+                console.log(name);
                 if (!this.beforePush(name)) {
                     willpush = false;
                 }

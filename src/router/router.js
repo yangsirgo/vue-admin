@@ -165,25 +165,36 @@ export const appRouter = [
     },
     {
         path: '/form',
-        icon: 'android-checkbox',
+        icon: 'settings',
         name: 'form',
         title: '系统配置',
         component: Main,
         children: [
-            {   path: '/artical-publish',
+            {   path: 'artical-publish',
                 title: '用户配置',
                 name: 'artical-publish',
                 icon: 'compose',
+                component: () => import('@/views/form/article-publish/artical-publish-center.vue'),
                 children:[
-                    {   path: '/artical-publish-sub',
+                    {   path: 'artical-publish-sub',
                         title: '管理员',
                         name: 'artical-publish-sub',
                         icon: 'person',
+                        component: () => import('@/views/tables/exportable-table-JD.vue')
+                    },
+                    {   path: 'partInfo',
+                        title: '部门信息',
+                        name: 'partInfo',
+                        icon: 'person-stalker',
                         component: () => import('@/views/form/work-flow/work-flow.vue')
                     }
                 ]},
-            { path: 'workflow', title: '工作流', name: 'workflow', icon: 'arrow-swap', component: () => import('@/views/form/work-flow/work-flow.vue') }
-
+        {   path: '',
+            title: '工单配置',
+            name: 'Worksheet',
+            icon: 'wrench',
+            component: () => import('@/views/form/work-flow/work-flow.vue')
+        }
         ]
     },
      //{

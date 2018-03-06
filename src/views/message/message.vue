@@ -17,6 +17,7 @@
     div.ivu-table-wrapper{
         margin-top: 5px;
     }
+
 </style>
 <template>
     <div>
@@ -37,9 +38,6 @@
             <Select v-model="allState" style="width:100px">
                 <Option v-for="item in stateList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
-        <Select v-model="allState" style="width:100px">
-            <Option v-for="item in stateList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </Select>
             <span class="button-span">
                 <Button type="ghost"  @click="confirm"><Icon type="android-checkbox-outline"></Icon>全部确认</Button>
                 <a id="hrefToExportTable" style="postion: absolute;left: -10px;top: -10px;width: 0px;height: 0px;"></a>
@@ -74,12 +72,12 @@
                     </Dropdown>
             </span>
             <Table :data="tableData1" :columns="tableColumns1" stripe ref="tableExcel" ></Table>
-            <div style="margin: 10px;overflow: hidden">
+            <div style="margin: 10px;margin-bottom: 110px;overflow: hidden">
                 <span class="span-page">
                     当前1 - {{pageNum}}条 , 共{{pageTotal}}条
                 </span>
                 <div style="float: right;">
-                    <Select v-model="pageNum" style="width:60px" @on-change="changePage">
+                    <Select v-model="pageNum" style="width:60px" @on-change="changePage" class="pageSelect">
                         <Option v-for="item in pageNumList" :value="item.value" :key="item.value">{{ item.label }}条</Option>
                     </Select>
                     <Page :total="pageTotal" :current="1" @on-change="changePage" :pageSize="pageNum"></Page>

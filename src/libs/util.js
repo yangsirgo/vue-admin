@@ -79,19 +79,23 @@ util.setCurrentPath = function (vm, name) {
     let isOtherRouter = false;
     vm.$store.state.app.routers.forEach(item => {
         if (item.children.length === 1) {
-            if (item.children[0].name === name) {
+        if (item.children[0].name === name) {
                 title = util.handleTitle(vm, item);
                 if (item.name === 'otherRouter') {
                     isOtherRouter = true;
                 }
             }
         } else {
-            item.children.forEach(child => {
-                if (child.name === name) {
-                    title = util.handleTitle(vm, child);
-                    if (item.name === 'otherRouter') {
-                        isOtherRouter = true;
-                    }
+        item.children.forEach(child => {
+            if (child.children) {
+                    child.children.forEach(child =>{
+                        if (child.name === name) {
+                                title = util.handleTitle(vm, child);
+                                if (child.name === 'otherRouter') {
+                                    isOtherRouter = true;
+                                }
+                            }
+                    })
                 }
             });
         }
@@ -124,11 +128,23 @@ util.setCurrentPath = function (vm, name) {
                 return item.children[0].name === name;
             } else {
                 let i = 0;
+                let j = 0;
                 let childArr = item.children;
                 let len = childArr.length;
                 while (i < len) {
-                    if (childArr[i].name === name) {
-                        return true;
+                    if(childArr[i].children){
+                        let subchildArr = childArr[i].children;
+                        let sublen = subchildArr.length;
+                        while(j<sublen){
+                            if (subchildArr[j].name === name) {
+                                return true;
+                            }
+                            j++;
+                        }
+                    }else{
+                        if (childArr[i].name === name) {
+                            return true;
+                        }
                     }
                     i++;
                 }
@@ -157,30 +173,76 @@ util.setCurrentPath = function (vm, name) {
                 }
             ];
         } else {
-            let childObj = currentPathObj.children.filter((child) => {
-                return child.name === name;
-            })[0];
-            currentPathArr = [
-                {
-                    title: '首页',
-                    path: '/home',
-                    name: 'home_index'
-                },
-                {
-                    title: currentPathObj.title,
-                    path: '',
-                    name: currentPathObj.name
-                },
-                {
-                    title: childObj.title,
-                    path: currentPathObj.path + '/' + childObj.path,
-                    name: name
-                }
-            ];
+            //问题在这里！！！！！！！
+            let secondPathObj = {};//三级导航匹配数组对应的上一级对象
+            let secondchildArr = [];//二级导航匹配数组
+            let thirdchildArr = [];//三级导航匹配数组
+            currentPathObj.children.forEach((child) => {
+                    var curArr = child.children;
+                    if(curArr){
+                        secondPathObj = curArr
+                        curArr.filter((item)=>{
+                            return item.name === name;
+                        })
+                    if(curArr.length!=0){
+                        secondPathObj = child;
+                        thirdchildArr = curArr;
+                    }
+                    }else{
+                        if(child.name === name){
+                            secondchildArr.push(child);
+                        };
+                    }
+            });
+            if(secondchildArr.length!=0){//二级导航
+                let childObj = secondchildArr[0];
+                currentPathArr = [
+                    {
+                        title: '首页',
+                        path: '/home',
+                        name: 'home_index'
+                    },
+                    {
+                        title: currentPathObj.title,
+                        path: '',
+                        name: currentPathObj.name
+                    },
+                    {
+                        title: childObj.title,
+                        path: currentPathObj.path + '/' + childObj.path,
+                        name: name
+                    }
+                ]
+               secondchildArr = [];//二级导航匹配数组
+            }else if(thirdchildArr.length!=0&&secondPathObj.path){//三级导航
+                currentPathArr = [
+                    {
+                        title: '首页',
+                        path: '/home',
+                        name: 'home_index'
+                    },
+                    {
+                        title: currentPathObj.title,
+                        path: '',
+                        name: currentPathObj.name
+                    },
+                    {
+                        title: secondPathObj.title,
+                        path: '',
+                        name: secondPathObj.name
+                    },
+                    {
+                        title: thirdchildArr[0].title,
+                        path: currentPathObj.path + '/' + secondPathObj.path + "/" + thirdchildArr[0].path,
+                        name: name
+                    }
+                ]
+                secondPathObj = {};//三级导航匹配数组对应的上一级对象
+                thirdchildArr = [];//三级导航匹配数组
+            }
         }
     }
     vm.$store.commit('setCurrentPath', currentPathArr);
-
     return currentPathArr;
 };
 
@@ -209,6 +271,7 @@ util.openNewPage = function (vm, name, argu, query) {
                 return name === item.name;
             }
         });
+
         tag = tag[0];
         if (tag) {
             tag = tag.children ? tag.children[0] : tag;

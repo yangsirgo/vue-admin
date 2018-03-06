@@ -664,7 +664,7 @@ export default {
         this.$nextTick(() => {
             getMapData();
             window.addEventListener('resize', function () {
-                mapChart.resize();
+                mapChart&&mapChart.resize();
             });
         });
     },

@@ -43,7 +43,15 @@ new Vue({
             if (item.children.length <= 1) {
                 tagsList.push(item.children[0]);
             } else {
-                tagsList.push(...item.children);
+                //if(item.children){
+                    item.children.map((itemsub) => {
+                        if (itemsub.children) {
+                        tagsList.push(...itemsub.children);
+                        }
+                    })
+                //}else{
+                    tagsList.push(...item.children);
+                //}
             }
         });
         this.$store.commit('setTagsList', tagsList);

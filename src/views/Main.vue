@@ -3,6 +3,9 @@
     div.main{
              margin-top: 0px;
          }
+    body .pageSelect .ivu-select-dropdown{
+        position: fixed !important;
+    }
 </style>
 <template>
     <div class="main" :class="{'main-hide-text': shrink}">
@@ -99,9 +102,7 @@
         },
         computed: {
             menuList () {
-//                console.log(this.$store.state.app.menuList);
 //                console.log(this.$store.state.app.openedSubmenuArr);
-                console.log(this.$store.state.app.menuList);
                 return this.$store.state.app.menuList;
             },
             pageTagsList () {
@@ -129,6 +130,8 @@
         methods: {
             init () {
                 let pathArr = util.setCurrentPath(this, this.$route.name);
+//                console.log("$route.name"+this.$route.name);
+//                console.log(pathArr);
                 this.$store.commit('updateMenulist');
                 if (pathArr.length >= 2) {
                     this.$store.commit('addOpenSubmenu', pathArr[1].name);
@@ -186,6 +189,8 @@
             '$route' (to) {
                 this.$store.commit('setCurrentPageName', to.name);
                 let pathArr = util.setCurrentPath(this, to.name);
+//                console.log("pathArr:"+pathArr);
+//                console.log(pathArr);
                 if (pathArr.length > 2) {
                     this.$store.commit('addOpenSubmenu', pathArr[1].name);
                 }
