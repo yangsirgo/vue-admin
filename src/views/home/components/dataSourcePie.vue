@@ -561,7 +561,7 @@ function getRegionCode(region) {
  * 获取地图数据
  */
 function getMapData() {
-    var url = ctx + '/json/getMapAlarmCntReport.json';
+    var url = 'https://easy-mock.com/mock/5a8e6342576015250b2733f1/sd/getMapAlarmCntReport';
     $.ajax({
         type: "GET",
         url: url,
@@ -581,12 +581,18 @@ function getMapData() {
                     }
                 }
                 //如果地图没有被实例化，实例化地图，并定时请求数据
+
                 if (!mapChart) {
                     mapData = msg.data;
+                    var i = 0;
                     renderMap(localStorage.lastMap || '000000')
+                    clearInterval(timer);
                     timer = setInterval(function () {
                         getMapData();
-                    }, 5000);
+                        i++;
+                        console.log(i);
+                        console.log(timer);
+                    }, 8000);
                 }
                 //如果地图已经实例化，只更新数据
                 else {
@@ -605,11 +611,10 @@ function getMapData() {
  * 渲染地图
  */
 function renderMap(areaCode) {
-    if (mapChart) {
-        mapChart.showLoading();
-    }
+
 //    var url = ctx + "/json/{0}.json".format(areaCode);
-    var url = ctx + "/json/"+areaCode+".json";
+//    var url = ctx + "/json/"+areaCode+".json";
+    var url = "https://easy-mock.com/mock/5a8e6342576015250b2733f1/sd/mapglobal";
     $.ajax({
         type: "GET",
         url: url,

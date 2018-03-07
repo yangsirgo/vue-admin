@@ -9,7 +9,7 @@
             <Card>
                 <p slot="title">
                     <Icon type="images"></Icon>
-                    将表格数据连同样式一起以图片形式导出
+                    日志查看
                 </p>
                 <Row>
                     <Col span="18">
@@ -136,7 +136,7 @@ export default {
             let data = [];
             for (let i = 0; i < 10; i++) {
                 data.push({
-                    name: '商圈' + Math.floor(Math.random() * 100 + 1),
+                    name: '日志' + Math.floor(Math.random() * 100 + 1),
                     status: Math.floor(Math.random() * 3 + 1),
                     portrayal: ['城市渗透', '人群迁移', '消费指数', '生活指数', '娱乐指数'],
                     people: [

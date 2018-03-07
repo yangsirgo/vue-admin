@@ -47,7 +47,7 @@
                                @focus="isFocusBoo = true"
                                @blur="isFocusBoo = false;"
                                @input="changeHanler">
-                            <span class="icondp iconfont icon-list-show-password icon_color icon_font"
+                            <span class="icondp iconfont icon-list-showpassword icon_color icon_font"
                                   v-show="isSee"
                                   @mouseup="mouseupHanler($event)"
                                   @mousedown="isPsw = 'text'"
@@ -105,7 +105,7 @@ export default {
                 Cookies.set('user', this.username);
                 Cookies.set('password', this.password);
                 //vuex语法，触发setAvator方法 将用户图像链接缓存到本地
-                this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
+                this.$store.commit('setAvator', 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar');
                 if (this.username === 'iview_admin') {
                     Cookies.set('access', 0);
                 } else {

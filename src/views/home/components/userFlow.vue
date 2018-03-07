@@ -254,7 +254,7 @@ assetsOpt = {
  */
 function getBrandData() {
     brandChart = echarts.init(document.getElementById('brand_chart'));
-    var url = ctx + '/json/getDeviceCntVendorReport.json';
+    var url = 'https://easy-mock.com/mock/5a8e6342576015250b2733f1/sd/getDeviceCntVendorReport';
     $.ajax({
         type: "GET",
         url: url,
@@ -370,7 +370,7 @@ function getBrandData() {
  */
 function getAssetsData() {
     assetsChart = echarts.init(document.getElementById('assets_chart'));
-    var url = ctx + '/json/getDeviceCntTypeReport.json'
+    var url = 'https://easy-mock.com/mock/5a8e6342576015250b2733f1/sd/getDeviceCntTypeReport'
     $.ajax({
         type: "GET",
         url: url,

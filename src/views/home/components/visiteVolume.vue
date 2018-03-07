@@ -357,7 +357,7 @@
         //报像头在线率
         $.ajax({
             type: "GET",
-            url: ctx + '/json/getDeviceOnlineReport.json',
+            url: 'https://easy-mock.com/mock/5a8e6342576015250b2733f1/sd/example',
             data: { deviceType: 'CAMERA', department: 1 },
             dataType: "json",
             success: function (msg) {
@@ -429,7 +429,7 @@
         //总在线率信息
         $.ajax({
             type: "GET",
-            url: ctx + '/json/getDeviceOnlineReport.json',
+            url: 'https://easy-mock.com/mock/5a8e6342576015250b2733f1/sd/example#!method=get',
             data: { deviceType: 'all', department: 1 },
             dataType: "json",
             success:function (msg) {
@@ -500,7 +500,7 @@
         //图像采集率信息
         $.ajax({
             type: "GET",
-            url: ctx + '/json/getHomePageImageStaticsReport.json',
+            url: 'https://easy-mock.com/mock/5a8e6342576015250b2733f1/sd/getHomePageImageStaticsReport',
             data:'',
             dataType: "json",
             success:function (msg) {

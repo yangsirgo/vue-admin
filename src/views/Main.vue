@@ -30,11 +30,11 @@
                         <Icon type="navicon" size="32"></Icon>
                     </Button>
                 </div>
-                <div class="header-middle-con">
-                    <div class="main-breadcrumb">
-                        <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
-                    </div>
-                </div>
+                <!--<div class="header-middle-con">-->
+                    <!--<div class="main-breadcrumb">-->
+                        <!--<breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="header-avator-con">
                     <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
                     <lock-screen></lock-screen>
@@ -58,9 +58,9 @@
                     </div>
                 </div>
             </div>
-            <div class="tags-con">
-                <tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>
-            </div>
+            <!--<div class="tags-con">-->
+                <!--<tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>-->
+            <!--</div>-->
         </div>
         <div class="single-page-con" :style="{left: shrink?'60px':'200px'}">
             <div class="single-page">
@@ -137,10 +137,10 @@
                     this.$store.commit('addOpenSubmenu', pathArr[1].name);
                 }
                 this.userName = Cookies.get('user');
-                let messageCount = 103;
+                let messageCount = 109;
                 this.messageCount = messageCount.toString();
                 this.checkTag(this.$route.name);
-                this.$store.commit('setMessageCount', 103);
+                this.$store.commit('setMessageCount', 109);
             },
             toggleClick () {
                 this.shrink = !this.shrink;

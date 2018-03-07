@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <iframe src="./src/views/my-components/text-editor/topology/topo.html"  frameborder="none" scrolling="auto" style="width: 100%; min-height:780px;"></iframe>
+        <iframe src="https://yangsirgo.github.io/vue-iview-admin/topology/topo.html"  frameborder="none" scrolling="auto" style="width: 100%; min-height:780px;"></iframe>
     </div>
 </template>
 

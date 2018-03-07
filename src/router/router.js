@@ -69,7 +69,7 @@ export const appRouter = [
     {
         path: '/access-test',
         icon: 'lock-combination',
-        title: '权限测试页',
+        title: '权限1',
         name: 'accesstest',
         access: 0,
         component: Main,
@@ -88,16 +88,6 @@ export const appRouter = [
         ]
     },
     {
-        path: '/message',
-        icon: 'alert-circled',
-        title: '报警管理',
-        name: 'accesstest',
-        component: Main,
-        children: [
-        { path: 'index', title: '报警管理', name: 'message_index',  component: () => import('@/views/message/message.vue') }
-    ]
-    },
-    {
         path: '/component',
         icon: 'network',
         name: 'component',
@@ -108,7 +98,7 @@ export const appRouter = [
                 path: 'text-editor',
                 icon: 'network',
                 name: 'text-editor',
-                title: '网络拓扑图',
+                title: '网络拓扑',
                 component: () => import('@/views/my-components/text-editor/text-editor.vue')
             }
             //{
@@ -164,39 +154,49 @@ export const appRouter = [
         ]
     },
     {
-        path: '/form',
-        icon: 'settings',
-        name: 'form',
-        title: '系统配置',
+        path: '/message',
+            icon: 'alert-circled',
+        title: '报警',
+        name: 'accesstest',
         component: Main,
         children: [
-            {   path: 'artical-publish',
-                title: '用户配置',
-                name: 'artical-publish',
-                icon: 'compose',
-                component: () => import('@/views/form/article-publish/artical-publish-center.vue'),
-                children:[
-                    {   path: 'artical-publish-sub',
-                        title: '管理员',
-                        name: 'artical-publish-sub',
-                        icon: 'person',
-                        component: () => import('@/views/tables/exportable-table-JD.vue')
-                    },
-                    {   path: 'partInfo',
-                        title: '部门信息',
-                        name: 'partInfo',
-                        icon: 'person-stalker',
-                        component: () => import('@/views/form/work-flow/work-flow.vue')
-                    }
-                ]},
-        {   path: '',
-            title: '工单配置',
-            name: 'Worksheet',
-            icon: 'wrench',
-            component: () => import('@/views/form/work-flow/work-flow.vue')
-        }
-        ]
+        { path: 'index', title: '报警', name: 'message_index',  component: () => import('@/views/message/message.vue') }
+    ]
     },
+    //{
+    //    path: '/form',
+    //    icon: 'settings',
+    //    name: 'form',
+    //    title: '系统',
+    //    component: Main,
+    //    children: [
+    //        {   path: 'artical-publish',
+    //            title: '用户配置',
+    //            name: 'artical-publish',
+    //            icon: 'compose',
+    //            component: () => import('@/views/form/article-publish/artical-publish-center.vue'),
+    //            children:[
+    //                {   path: 'artical-publish-sub',
+    //                    title: '管理员',
+    //                    name: 'artical-publish-sub',
+    //                    icon: 'person',
+    //                    component: () => import('@/views/tables/exportable-table-JD.vue')
+    //                },
+    //                {   path: 'partInfo',
+    //                    title: '部门信息',
+    //                    name: 'partInfo',
+    //                    icon: 'person-stalker',
+    //                    component: () => import('@/views/form/work-flow/work-flow.vue')
+    //                }
+    //            ]},
+    //    {   path: '',
+    //        title: '工单配置',
+    //        name: 'Worksheet',
+    //        icon: 'wrench',
+    //        component: () => import('@/views/form/work-flow/work-flow.vue')
+    //    }
+    //    ]
+    //},
      //{
      //    path: '/charts',
      //    icon: 'ios-analytics',
@@ -213,42 +213,42 @@ export const appRouter = [
         path: '/tables',
         icon: 'ios-grid-view',
         name: 'tables',
-        title: '表格',
+        title: '系统',
         component: Main,
         children: [
-            { path: 'dragableTable', title: '可拖拽排序', name: 'dragable-table', icon: 'arrow-move', component: () => import('@/views/tables/dragable-table.vue') },
-            { path: 'editableTable', title: '可编辑表格', name: 'editable-table', icon: 'edit', component: () => import('@/views/tables/editable-table.vue') },
-            { path: 'searchableTable', title: '可搜索表格', name: 'searchable-table', icon: 'search', component: () => import('@/views/tables/searchable-table.vue') },
+            //{ path: 'dragableTable', title: '可拖拽排序', name: 'dragable-table', icon: 'arrow-move', component: () => import('@/views/tables/dragable-table.vue') },
+            { path: 'editableTable', title: '权限测试', access: 0,name: 'editable-table', icon: 'edit', component: () => import('@/views/access/access-test.vue') },
+            { path: 'searchableTable', title: '管理员配置', name: 'searchable-table', icon: 'search', component: () => import('@/views/tables/editable-table.vue') },
             { path: 'exportableTable', title: '表格导出数据', name: 'exportable-table', icon: 'code-download', component: () => import('@/views/tables/exportable-table.vue') },
-            { path: 'table2image', title: '表格转图片', name: 'table-to-image', icon: 'images', component: () => import('@/views/tables/table-to-image.vue') }
+            { path: 'table2image', title: '日志查看', name: 'table-to-image', icon: 'images', component: () => import('@/views/tables/table-to-image.vue') }
         ]
     },
-    {
-        path: '/advanced-router',
-        icon: 'ios-infinite',
-        name: 'advanced-router',
-        title: '高级路由',
-        component: Main,
-        children: [
-            { path: 'mutative-router', title: '动态路由', name: 'mutative-router', icon: 'link', component: () => import('@/views/advanced-router/mutative-router.vue') },
-            { path: 'argument-page', title: '带参页面', name: 'argument-page', icon: 'android-send', component: () => import('@/views/advanced-router/argument-page.vue') }
-        ]
-    },
-    {
-        path: '/error-page',
-        icon: 'android-sad',
-        title: '错误页面',
-        name: 'errorpage',
-        component: Main,
-        children: [
-            { path: 'index', title: '错误页面', name: 'errorpage_index', component: () => import('@/views/error-page/error-page.vue') }
-        ]
-    },
+    //{
+    //    path: '/advanced-router',
+    //    icon: 'ios-infinite',
+    //    name: 'advanced-router',
+    //    title: '高级路由',
+    //    component: Main,
+    //    children: [
+    //        { path: 'mutative-router', title: '动态路由', name: 'mutative-router', icon: 'link', component: () => import('@/views/advanced-router/mutative-router.vue') },
+    //        { path: 'argument-page', title: '带参页面', name: 'argument-page', icon: 'android-send', component: () => import('@/views/advanced-router/argument-page.vue') }
+    //    ]
+    //},
+    //{
+    //    path: '/error-page',
+    //    icon: 'android-sad',
+    //    title: '错误页面',
+    //    name: 'errorpage',
+    //    component: Main,
+    //    children: [
+    //        { path: 'index', title: '错误页面', name: 'errorpage_index', component: () => import('@/views/error-page/error-page.vue') }
+    //    ]
+    //},
     {
         path: '/access',
             icon: 'key',
         name: 'access',
-        title: '权限管理',
+        title: '权限',
         component: Main,
         children: [
         { path: 'index', title: '权限管理', name: 'access_index', component: () => import('@/views/access/access.vue') }
