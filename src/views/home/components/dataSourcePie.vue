@@ -586,13 +586,13 @@ function getMapData() {
                     mapData = msg.data;
                     var i = 0;
                     renderMap(localStorage.lastMap || '000000')
-                    clearInterval(timer);
-                    timer = setInterval(function () {
-                        getMapData();
-                        i++;
-                        console.log(i);
-                        console.log(timer);
-                    }, 8000);
+//                    clearInterval(timer);
+//                    timer = setInterval(function () {
+////                        getMapData();
+//                        i++;
+//                        console.log(i);
+//                        console.log(timer);
+//                    }, 8000);
                 }
                 //如果地图已经实例化，只更新数据
                 else {

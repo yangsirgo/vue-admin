@@ -1,4 +1,5 @@
 import Main from '@/views/Main.vue';
+import Permission from '@/router/permissionControl';
 
 // 不作为Main组件的子页面展示的页面单独写，如下
 export const loginRouter = {
@@ -71,10 +72,23 @@ export const appRouter = [
         icon: 'lock-combination',
         title: '权限1',
         name: 'accesstest',
-        access: 0,
+        access: [
+            Permission.user1,
+            Permission.M_user,
+            Permission.S_user
+        ],
         component: Main,
         children: [
-            { path: 'index', title: '权限测试页', name: 'accesstest_index', access: 0, component: () => import('@/views/access/access-test.vue') }
+            {   path: 'index',
+                title: '权限测试页',
+                access: [
+                    Permission.user1,
+                    Permission.M_user,
+                    Permission.S_user
+                ],
+                name: 'accesstest_index',
+                access: 0,
+                component: () => import('@/views/access/access-test.vue') }
         ]
     },
     {
@@ -89,14 +103,14 @@ export const appRouter = [
     },
     {
         path: '/component',
-        icon: 'network',
+        icon: 'ios-world-outline',
         name: 'component',
         title: '网络',
         component: Main,
         children: [
             {
                 path: 'text-editor',
-                icon: 'network',
+                icon: 'ios-world-outline',
                 name: 'text-editor',
                 title: '网络拓扑',
                 component: () => import('@/views/my-components/text-editor/text-editor.vue')
@@ -211,16 +225,25 @@ export const appRouter = [
      //},
     {
         path: '/tables',
-        icon: 'ios-grid-view',
+        icon: 'gear-a',
         name: 'tables',
         title: '系统',
         component: Main,
         children: [
             //{ path: 'dragableTable', title: '可拖拽排序', name: 'dragable-table', icon: 'arrow-move', component: () => import('@/views/tables/dragable-table.vue') },
-            { path: 'editableTable', title: '权限测试', access: 0,name: 'editable-table', icon: 'edit', component: () => import('@/views/access/access-test.vue') },
-            { path: 'searchableTable', title: '管理员配置', name: 'searchable-table', icon: 'search', component: () => import('@/views/tables/editable-table.vue') },
+            { path: 'editableTable',
+                title: '权限测试',
+                access: [
+                    Permission.user2,
+                    Permission.M_user,
+                    Permission.S_user
+                    ],
+                name: 'editable-table',
+                icon: 'edit',
+                component: () => import('@/views/access/access-test.vue') },
+            { path: 'searchableTable', title: '管理员配置', name: 'person-stalker', icon: 'search', component: () => import('@/views/tables/editable-table.vue') },
             { path: 'exportableTable', title: '表格导出数据', name: 'exportable-table', icon: 'code-download', component: () => import('@/views/tables/exportable-table.vue') },
-            { path: 'table2image', title: '日志查看', name: 'table-to-image', icon: 'images', component: () => import('@/views/tables/table-to-image.vue') }
+            { path: 'table2image', title: '日志查看', name: 'table-to-image', icon: 'ios-list-outline', component: () => import('@/views/tables/table-to-image.vue') }
         ]
     },
     //{

@@ -1,5 +1,8 @@
-<style lang="less">
+<style lang="less" scoped>
     @import '../../../styles/loading.less';
+    .main .single-page-con .single-page{
+        margin: 0px;
+    }
 </style>
 
 <template>
