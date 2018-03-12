@@ -1,12 +1,9 @@
 <style lang="less" scoped>
     @import '../../../styles/loading.less';
-    .main .single-page-con .single-page{
-        margin: 0px;
-    }
 </style>
 
 <template>
-    <div>
+    <div style="margin: -15px">
         <iframe src="https://yangsirgo.github.io/vue-iview-admin/topology/topo.html"  frameborder="none" scrolling="auto" style="width: 100%; min-height:780px;"></iframe>
     </div>
 </template>

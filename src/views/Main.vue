@@ -6,6 +6,7 @@
     body .pageSelect .ivu-select-dropdown{
         position: fixed !important;
     }
+
 </style>
 <template>
     <div class="main" :class="{'main-hide-text': shrink}">

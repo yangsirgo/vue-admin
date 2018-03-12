@@ -87,7 +87,6 @@ export const appRouter = [
                     Permission.S_user
                 ],
                 name: 'accesstest_index',
-                access: 0,
                 component: () => import('@/views/access/access-test.vue') }
         ]
     },

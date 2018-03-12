@@ -26,12 +26,11 @@
                 <!--<Icon type="information-circled"></Icon>-->
                 <!--报警管理-->
             <!--</p>-->
+            <Input v-model="searchConName1" icon="search" @on-change="handleSearch1" placeholder="IP/内容..."
+               style="width: 200px"/>
             <Select v-model="model2" style="width:100px">
                 <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
-            <Input v-model="searchConName1" icon="search" @on-change="handleSearch1" placeholder="IP/内容..."
-                   style="width: 200px"/>
-
             <Select v-model="allType" style="width:100px">
                 <Option v-for="item in typeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
@@ -39,12 +38,12 @@
                 <Option v-for="item in stateList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
             <span class="button-span">
-                <Button type="ghost"  @click="confirm"><Icon type="android-checkbox-outline"></Icon>全部确认</Button>
+                <Button type="ghost"  @click="confirm"><Icon type="android-checkbox-outline" size="18"></Icon></Button>
                 <a id="hrefToExportTable" style="postion: absolute;left: -10px;top: -10px;width: 0px;height: 0px;"></a>
-                <Button type="ghost"  @click="exportExcel"><Icon type="ios-download-outline"></Icon>导出</Button>
+                <Button type="ghost"  @click="exportExcel"><Icon type="ios-download-outline"  size="18"></Icon></Button>
 
                     <Dropdown  trigger="custom" :visible="visible" placement="bottom-end">
-                        <Button  type="ghost" icon="gear-b" @click="handleOpen"></Button>
+                        <Button  type="ghost" @click="handleOpen"><Icon type="gear-a"  size="18"></Icon></Button>
                         <DropdownMenu slot="list">
                             <Checkbox-group v-model="tableColumnsChecked" @on-change="changeTableColumns">
                                 <Checkbox label="select1" style="display: none">多选框</Checkbox>
@@ -53,8 +52,8 @@
                                 <br/>
                                 <Checkbox label="status3">类型</Checkbox>
                                 <br/>
-                                <Checkbox label="portrayal4">级别</Checkbox>
-                                <br/>
+                                <!--<Checkbox label="portrayal4">级别</Checkbox>-->
+                                <!--<br/>-->
                                 <Checkbox label="people5">MAC</Checkbox>
                                 <br/>
                                 <Checkbox label="time6">内容</Checkbox>
@@ -93,7 +92,7 @@
     export default {
         data () {
             return {
-                tableColumnsChecked: ['select1','name2', 'status3', 'portrayal4', 'people5', 'time6', 'update7', 'ruwang_sta8', 'update19'],
+                tableColumnsChecked: ['select1','name2', 'status3', 'people5', 'time6', 'update7', 'ruwang_sta8', 'update19'],
                 visible: false,
                 searchConName1:'',
                 cityList: [
@@ -205,7 +204,7 @@
                         key: 'status',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status === 1 ? '#ff9900' : row.status === 2 ? '#2d8cf0' : '#ed3f14';
+                            const color = row.status === 1 ? '#a99e67' : row.status === 2 ? '#38cdd3' : '#f36266';
                             const text = row.status === 1 ? '警告' : row.status === 2 ? '信息' : '致命';
 
                             return h('Tag', {
@@ -216,36 +215,38 @@
                             }, text);
                         }
                     },
-                    portrayal4:{
-                        title: '级别',
-                        key: 'portrayal',
-                        render: (h, params) => {
-                            return h('Poptip', {
-                                props: {
-                                    trigger: 'hover',
-                                    title: params.row.portrayal.length + 'portrayals',
-                                    placement: 'bottom'
-                                }
-                            }, [
-                                h('Tag', params.row.portrayal.length),
-                                h('div', {
-                                    slot: 'content'
-                                }, [
-                                    h('ul', this.tableData1[params.index].portrayal.map(item => {
-                                        return h('li', {
-                                            style: {
-                                                textAlign: 'center',
-                                                padding: '4px'
-                                            }
-                                        }, item)
-                                    }))
-                                ])
-                            ]);
-                        }
-                    },
+//                    portrayal4:{
+//                        title: '级别',
+//                        key: 'portrayal',
+//                        render: (h, params) => {
+//                            return h('Poptip', {
+//                                props: {
+//                                    trigger: 'hover',
+//                                    title: params.row.portrayal.length + 'portrayals',
+//                                    placement: 'bottom'
+//                                }
+//                            }, [
+//                                h('Tag', params.row.portrayal.length),
+//                                h('div', {
+//                                    slot: 'content'
+//                                }, [
+//                                    h('ul', this.tableData1[params.index].portrayal.map(item => {
+//                                        return h('li', {
+//                                            style: {
+//                                                textAlign: 'center',
+//                                                padding: '4px'
+//                                            }
+//                                        }, item)
+//                                    }))
+//                                ])
+//                            ]);
+//                        }
+//                    },
                     people5:{
                         title: 'MAC',
                         key: 'people',
+                        align:"center",
+                        width:"100px",
                         render: (h, params) => {
                             return h('Poptip', {
                                 props: {
@@ -273,8 +274,10 @@
                     time6:{
                         title: '内容',
                         key: 'time',
+                        align:"center",
+                        width:"350px",
                         render: (h, params) => {
-                            return h('div', 'Almost' + params.row.time + 'days');
+                            return h('div', '当前值：69.79包/秒 阈值>60包/秒' + params.row.time + 'days');
                         }
                     },
                     update7:{
@@ -292,7 +295,7 @@
                             const text = row.ruwang_sta === 1 ? '开启' : '隔离';
                             return h('i-switch', {
                                 props: {
-                                    size:"large",
+                                    size:"small",
                                     value: row.ruwang_sta == 1
                                 },
                                 on: {
@@ -302,10 +305,10 @@
                             },[
                                 h("span",{
                                     slot:"open"
-                                },"开启"),
+                                }),
                                 h("span",{
                                     slot:"close"
-                                },"隔离"),
+                                }),
                             ]);
                         }
                     },
