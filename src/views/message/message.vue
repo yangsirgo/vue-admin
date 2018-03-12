@@ -194,13 +194,14 @@
                     name2:{
                         title: '报警IP',
                         sortable: true,
-                        width:"200px",
+                        width:"150px",
                         align:"left",
                         key: 'name'
 
                     },
                     status3:{
                         title: '类型',
+                        width:"100px",
                         key: 'status',
                         render: (h, params) => {
                             const row = params.row;
@@ -275,13 +276,14 @@
                         title: '内容',
                         key: 'time',
                         align:"center",
-                        width:"350px",
+                        width:"300px",
                         render: (h, params) => {
                             return h('div', '当前值：69.79包/秒 阈值>60包/秒' + params.row.time + 'days');
                         }
                     },
                     update7:{
                         title: '时间',
+                        width:"100px",
                         key: 'update',
                         render: (h, params) => {
                             return h('div', this.formatDate(this.tableData1[params.index].update));
@@ -289,6 +291,7 @@
                     },
                     ruwang_sta8:{
                         title: '入网状态',
+                        align:"center",
                         key: 'ruwang_sta',
                         render: (h, params) => {
                             const row = params.row;
